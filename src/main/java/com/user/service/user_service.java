@@ -30,4 +30,10 @@ public class user_service
     {
         return repo.findById(id);
     }
+
+    public void delete_user(int id)
+    {
+        repo.deleteById(id);
+    }
+
 }

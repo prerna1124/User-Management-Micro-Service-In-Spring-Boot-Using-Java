@@ -33,4 +33,11 @@ public class user_controller
     {
         return service.find_user_by_id(id);
     }
+
+    @PostMapping("deleteUser/{id}")
+    public void delete_user(@PathVariable Integer id)
+    {
+        service.delete_user(id);
+    }
+
 }

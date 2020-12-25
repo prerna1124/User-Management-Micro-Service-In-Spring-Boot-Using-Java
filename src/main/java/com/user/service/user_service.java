@@ -6,6 +6,8 @@ import com.user.repository.user_repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class user_service
 {
@@ -14,7 +16,12 @@ public class user_service
 
     public user_model save_user(user_model u)
     {
-        user_model res = repo.save(u);
-        return res;
+        return repo.save(u);
+
+    }
+
+    public List<user_model> find_all_users()
+    {
+        return repo.findAll();
     }
 }

@@ -3,10 +3,10 @@ package com.user.controller;
 import com.user.model.user_model;
 import com.user.service.user_service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/")
@@ -28,5 +28,9 @@ public class user_controller
         return service.find_all_users();
     }
 
-
+    @GetMapping("/findUser/{id}")
+    public Optional<user_model> find_user_by_id(@PathVariable Integer id)
+    {
+        return service.find_user_by_id(id);
+    }
 }

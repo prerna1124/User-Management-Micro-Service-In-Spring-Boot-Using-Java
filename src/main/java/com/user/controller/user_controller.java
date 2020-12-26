@@ -40,4 +40,10 @@ public class user_controller
         service.delete_user(id);
     }
 
+    @PostMapping("updateUser/{id}")
+    public user_model update_user(@PathVariable Integer id,@RequestBody user_model user)
+    {
+        return service.update_user(id,user);
+    }
+
 }

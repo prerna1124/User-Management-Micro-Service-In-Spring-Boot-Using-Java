@@ -1,8 +1,11 @@
 package com.user.controller;
 
+import com.user.exception.ResourceNotFoundException;
 import com.user.model.user_model;
+import com.user.repository.user_repository;
 import com.user.service.user_service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +32,7 @@ public class user_controller
     }
 
     @GetMapping("/findUser/{id}")
-    public Optional<user_model> find_user_by_id(@PathVariable Integer id)
+    public ResponseEntity<user_model> find_user_by_id(@PathVariable Integer id)
     {
         return service.find_user_by_id(id);
     }

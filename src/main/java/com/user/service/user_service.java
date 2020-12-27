@@ -1,9 +1,11 @@
 package com.user.service;
 
 
+import com.user.exception.ResourceNotFoundException;
 import com.user.model.user_model;
 import com.user.repository.user_repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,9 +30,10 @@ public class user_service
         return repo.findAll();
     }
 
-    public Optional<user_model> find_user_by_id(int id)
-    {
-        return repo.findById(id);
+    public ResponseEntity<user_model> find_user_by_id(Integer id){
+        user_model user = repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        return ResponseEntity.ok(user);
     }
 
     public void delete_user(int id)
@@ -40,8 +43,8 @@ public class user_service
 
     public user_model update_user(int id,user_model user)
     {
-        Optional<user_model> exist = repo.findById(id);
-        user_model existingUser = exist.get();
+        user_model existingUser = repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
         if(user.getAge()!=0)
             existingUser.setAge(user.getAge());
         if(user.getEmail_address()!=null)
